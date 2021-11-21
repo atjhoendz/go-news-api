@@ -1,0 +1,19 @@
+### POST a news
+POST {{baseURLv1}}/news
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Sample News Title",
+  "content": "This is news content with long text",
+  "authorID": 1
+}
+
+### Get all news
+GET {{baseURLv1}}/news
+
+### Get a news
+GET {{baseURLv1}}/news/1
+
+### Remove a news
+DELETE {{baseURLv1}}/news/1
