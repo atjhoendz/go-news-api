@@ -9,6 +9,7 @@ import (
 
 type (
 	Controller struct {
+		NewsService Service
 	}
 
 	AddNewsRequestBody struct {
@@ -51,13 +52,13 @@ func (c Controller) AddNewsHandler(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
 
-	result := Service{}.AddNews(*body)
+	result := c.NewsService.AddNews(*body)
 
 	return ctx.JSON(http.StatusCreated, result)
 }
 
 func (c Controller) GetAllNewsHandler(ctx echo.Context) error {
-	result := Service{}.GetAll()
+	result := c.NewsService.GetAll()
 
 	return ctx.JSON(http.StatusOK, result)
 }
@@ -71,7 +72,7 @@ func (c Controller) GetOneNewsHandler(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
 
-	result := Service{}.GetOne(id)
+	result := c.NewsService.GetOne(id)
 
 	if result == nil {
 		return ctx.JSON(http.StatusNotFound, result)
@@ -89,7 +90,7 @@ func (c Controller) RemoveNewsHandler(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
 
-	result := Service{}.Remove(id)
+	result := c.NewsService.Remove(id)
 
 	if result == nil {
 		return ctx.JSON(http.StatusNotFound, result)

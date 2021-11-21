@@ -8,9 +8,8 @@ import (
 )
 
 type Service struct {
+	TableNews database.News
 }
-
-var tableNews database.News
 
 func (s Service) AddNews(body AddNewsRequestBody) *models.News {
 	news := models.News{
@@ -24,17 +23,17 @@ func (s Service) AddNews(body AddNewsRequestBody) *models.News {
 		AuthorID: body.AuthorID,
 	}
 
-	createdNews := tableNews.AddNews(news.ID, &news)
+	createdNews := s.TableNews.AddNews(news.ID, &news)
 
 	return createdNews
 }
 
 func (s Service) GetAll() database.News {
-	return tableNews.GetAllNews()
+	return s.TableNews.GetAllNews()
 }
 
 func (s Service) GetOne(id int) *models.News {
-	return tableNews.GetOneNews(id)
+	return s.TableNews.GetOneNews(id)
 }
 
 func (s Service) Remove(id int) *models.News {
@@ -44,6 +43,6 @@ func (s Service) Remove(id int) *models.News {
 		return news
 	}
 
-	tableNews.RemoveNews(id)
+	s.TableNews.RemoveNews(id)
 	return news
 }
