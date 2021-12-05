@@ -13,10 +13,9 @@ type (
 	}
 
 	AddNewsRequestBody struct {
-		ID       int    `json:"id"`
 		Title    string `json:"title"`
 		Content  string `json:"content"`
-		AuthorID int    `json:"authorID"`
+		AuthorID uint   `json:"authorID"`
 	}
 )
 
@@ -75,7 +74,7 @@ func (c Controller) GetOneNewsHandler(ctx echo.Context) error {
 	result := c.NewsService.GetOne(id)
 
 	if result == nil {
-		return ctx.JSON(http.StatusNotFound, result)
+		return ctx.NoContent(http.StatusNotFound)
 	}
 
 	return ctx.JSON(http.StatusOK, result)
@@ -93,7 +92,7 @@ func (c Controller) RemoveNewsHandler(ctx echo.Context) error {
 	result := c.NewsService.Remove(id)
 
 	if result == nil {
-		return ctx.JSON(http.StatusNotFound, result)
+		return ctx.NoContent(http.StatusNotFound)
 	}
 
 	return ctx.JSON(http.StatusOK, result)

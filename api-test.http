@@ -3,7 +3,6 @@ POST {{baseURLv1}}/news
 Content-Type: application/json
 
 {
-  "id": 1,
   "title": "Sample News Title",
   "content": "This is news content with long text",
   "authorID": 1
@@ -13,7 +12,7 @@ Content-Type: application/json
 GET {{baseURLv1}}/news
 
 ### Get a news
-GET {{baseURLv1}}/news/1
+GET {{baseURLv1}}/news/2
 
 ### Remove a news
-DELETE {{baseURLv1}}/news/1
+DELETE {{baseURLv1}}/news/3
