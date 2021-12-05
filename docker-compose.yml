@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  go_news_api_db_postgresql:
+    container_name: go_news_api_db_postgresql
+    image: "postgres"
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Jakarta
+      - POSTGRES_USER=$DB_USERNAME
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_PORT=$DB_PORT
+      - POSTGRES_HOST=$DB_HOST
+    volumes:
+      - go_news_api_db_data:/var/lib/postgresql/data/
+    networks:
+      - go_news_api_network
+
+volumes:
+  go_news_api_db_data:
+    name: go_news_api_db_data
+
+networks:
+  go_news_api_network:
+    name: go_news_api_network
